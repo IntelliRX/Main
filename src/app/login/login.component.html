@@ -29,9 +29,12 @@
 </div>
 </div>
 <div>
-<button (click)="login()" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
-              Log In
-            </button>
+ <button (click)="login()">Normal Login</button>
+
+  <hr />
+
+  <button (click)="signInWithGoogle()">Login with Google</button>
+  <button (click)="signOut()">Logout</button>
 </div>
 </form>
 <div class="mt-6">
