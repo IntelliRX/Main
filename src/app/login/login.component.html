@@ -28,14 +28,6 @@
 <input autocomplete="current-password" class="form-input block w-full rounded-lg border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm h-12 px-4" id="password" name="password" placeholder="Your password" required="" type="password"/>
 </div>
 </div>
-<div>
- <button (click)="login()">Normal Login</button>
-
-  <hr />
-
-  <button (click)="signInWithGoogle()">Login with Google</button>
-  <button (click)="signOut()">Logout</button>
-</div>
 </form>
 <div class="mt-6">
 <div class="relative">
@@ -48,8 +40,8 @@
 </div>
 <div class="mt-6 grid grid-cols-3 gap-3">
 <div>
-<a class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" href="#">
-<span class="sr-only">Sign in with Google</span>
+<a class="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" (click)="signInWithGoogle()">
+<span class="sr-only" (click)="signInWithGoogle()">Sign in with Google</span>
 <svg class="text-[#4285F4]" fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M224,128a96,96,0,1,1-21.95-61.09,8,8,0,1,1-12.33,10.18A80,80,0,1,0,207.6,136H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128Z"></path></svg>
 </a>
 </div>

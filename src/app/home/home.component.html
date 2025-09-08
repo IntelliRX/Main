@@ -25,7 +25,10 @@
 </button>
 </div>
 <div class="h-10 w-px bg-[#302839]"></div>
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDVx7_pKRpL9jhupm0_wBICJOPfUWvh2TZlbdd2pZclvwHh-MJElV77rj_0UEaf9KLGFVnCaJGhYzCp2WfR2W1AcZXYWe6qQp3KEh4dpFJJ_bbxRwmqp5BiHvTprs-PGIUA7GqRIqugRzggmsKMq4h2N8D7oJBFV3ZjcmAJVTAVYGh_2P_vVYbdMkVG_QGpQMoEYHa-hTuCVYYQd_VCNBtQJg5VHJzuBDT47M0QNX7sPl5hfYI5SdqYe6cCnv9AouHgqp8APtofNiU");'></div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10">
+    <img [src]="user?.photoURL || ''" alt="Profile" width="50" height="50" />
+    <button (click)="signOut()">Logout</button>
+</div>
 </div>
 </header>
 <main class="flex flex-1 items-center justify-center py-5">
