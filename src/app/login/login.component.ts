@@ -13,7 +13,7 @@ constructor(private loginService: LoginService, private router: Router) {}
 
   async login() {
     if (this.loginService.isLoggedIn()) {
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/patient"]);
     } else {
       // Show error message
     }
@@ -22,7 +22,7 @@ constructor(private loginService: LoginService, private router: Router) {}
   async signInWithGoogle() {
     const user = await this.loginService.loginWithGoogle();
     if (user) {
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/patient"]);
     } else {
       alert("Google login failed");
     }

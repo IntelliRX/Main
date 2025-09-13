@@ -3,6 +3,7 @@ import { appConfig } from './app/app.config';
 import { App } from './app/app';
 import { initializeApp } from 'firebase/app';
 import { environment } from './app/environments/environment';
+import { getDatabase } from 'firebase/database';
 
 initializeApp(environment.firebaseConfig);
 

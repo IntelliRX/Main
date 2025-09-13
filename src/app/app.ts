@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 export class App {
   
   constructor(private router: Router) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/patient']);
   }
 
   protected readonly title = signal('my-angular-app');
