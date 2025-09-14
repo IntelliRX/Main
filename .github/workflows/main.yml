@@ -1,0 +1,71 @@
+name: Build & Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main    # change if your default branch is 'master' or something else
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      site-path: site
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build (production)
+        # This will call your project's build script. Common script: "build": "ng build"
+        run: |
+          if npm run | grep -q "build"; then
+            # run npm build script and pass production config if CLI supports it
+            npm run build -- --configuration production || npm run build
+          else
+            npx ng build --configuration production
+          fi
+
+      - name: Prepare site folder for Pages
+        # Angular often outputs to dist/<project-name>. This normalizes it into ./site
+        run: |
+          set -e
+          rm -rf site
+          mkdir -p site
+          if [ ! -d dist ]; then
+            echo "No dist directory found — exiting with error"
+            ls -la
+            exit 1
+          fi
+
+          # if dist contains a single subfolder (common), copy its contents; otherwise copy everything
+          entries=(dist/*)
+          if [ ${#entries[@]} -eq 1 ] && [ -d "${entries[0]}" ]; then
+            cp -a "${entries[0]}/." site/
+          else
+            cp -a dist/. site/
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
