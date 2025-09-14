@@ -7,7 +7,10 @@ import { collection, getDocs, query, where, doc, setDoc } from 'firebase/firesto
 
 @Component({
   selector: 'app-patient-form',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './patient-form.component.html'
 })
 export class PatientFormComponent {

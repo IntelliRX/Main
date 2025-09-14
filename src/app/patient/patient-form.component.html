@@ -1,5 +1,6 @@
-<form [formGroup]="patientForm" (ngSubmit)="submit()" class="max-w-4xl mx-auto mt-10 bg-white shadow-md rounded-2xl p-8 space-y-8">
-  
+<form [formGroup]="patientForm" (ngSubmit)="submit()"
+  class="max-w-4xl mx-auto bg-white shadow-md rounded-2xl p-8 space-y-8">
+
   <!-- Header -->
   <h2 class="text-2xl font-bold text-gray-900">Add / Edit Patient</h2>
 
@@ -11,39 +12,37 @@
         class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
     </div> -->
     <!-- Phone Input with Suggestions -->
-<div class="relative">
-  <label class="block text-sm font-medium text-gray-700">Phone Number</label>
-  <input formControlName="id" type="text"
-    (input)="searchPhones($event)"
-    class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
+    <div class="relative">
+      <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+      <input formControlName="id" type="text" (input)="searchPhones($event)"
+        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
 
-  <ul *ngIf="showPhoneSuggestions" class="absolute z-10 bg-white border border-gray-200 mt-1 w-full rounded-lg shadow-md">
-    <li *ngFor="let phone of phoneSuggestions"
-        (click)="selectPhone(phone)"
-        class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-      {{ phone }}
-    </li>
-  </ul>
-</div>
+      <ul *ngIf="showPhoneSuggestions"
+        class="absolute z-10 bg-white border border-gray-200 mt-1 w-full rounded-lg shadow-md">
+        <li *ngFor="let phone of phoneSuggestions" (click)="selectPhone(phone)"
+          class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+          {{ phone }}
+        </li>
+      </ul>
+    </div>
     <!-- <div formGroupName="data">
       <label class="block text-sm font-medium text-gray-700">Name</label>
       <input formControlName="name" type="text"
         class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
     </div> -->
     <div class="relative" formGroupName="data">
-  <label class="block text-sm font-medium text-gray-700">Member Name</label>
-  <input formControlName="name" type="text"
-    (input)="searchMembers($event)"
-    class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
+      <label class="block text-sm font-medium text-gray-700">Member Name</label>
+      <input formControlName="name" type="text" (input)="searchMembers($event)"
+        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
 
-  <ul *ngIf="showMemberSuggestions" class="absolute z-10 bg-white border border-gray-200 mt-1 w-full rounded-lg shadow-md">
-    <li *ngFor="let member of memberSuggestions"
-        (click)="selectMember(member)"
-        class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-      {{ member.id }} ({{ member.dateOfBirth || 'No DOB' }})
-    </li>
-  </ul>
-</div>
+      <ul *ngIf="showMemberSuggestions"
+        class="absolute z-10 bg-white border border-gray-200 mt-1 w-full rounded-lg shadow-md">
+        <li *ngFor="let member of memberSuggestions" (click)="selectMember(member)"
+          class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+          {{ member.id }} ({{ member.dateOfBirth || 'No DOB' }})
+        </li>
+      </ul>
+    </div>
     <div formGroupName="data">
       <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
       <input formControlName="dateOfBirth" type="date"
@@ -66,15 +65,16 @@
         <button type="button" (click)="presentIllness.removeAt(i)" class="text-red-500">✕</button>
       </div>
     </div>
-    <button type="button" (click)="addIllness()" class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+ Add Illness</button>
+    <button type="button" (click)="addIllness()" class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+ Add
+      Illness</button>
   </div>
 
   <!-- Allergies -->
-<div formGroupName="data">
-  <label class="block text-sm font-medium text-gray-700">Allergies</label>
-  <input formControlName="allergies" type="text"
-    class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-</div>
+  <div formGroupName="data">
+    <label class="block text-sm font-medium text-gray-700">Allergies</label>
+    <input formControlName="allergies" type="text"
+      class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
+  </div>
 
   <!-- Details -->
   <div formGroupName="data">
@@ -84,52 +84,54 @@
         <textarea formControlName="chiefComplaints"
           class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
       </div>
-<!-- Diagnosis -->
-<div>
-  <label class="block text-sm font-medium text-gray-700">Diagnosis</label>
-  <textarea formControlName="diagnosis"
-    class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
-</div>
+      <!-- Diagnosis -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Diagnosis</label>
+        <textarea formControlName="diagnosis"
+          class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
+      </div>
 
-<!-- Treatment Plan -->
-<div>
-  <label class="block text-sm font-medium text-gray-700">Treatment Plan</label>
-  <textarea formControlName="treatmentPlan"
-    class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
-</div>
-     <!-- Examination -->
-<div>
-  <label class="block text-sm font-semibold text-gray-800">Examination</label>
-  <div formArrayName="examination" class="space-y-2 mt-2">
-    <div *ngFor="let ex of examination.controls; let i = index" [formGroupName]="i"
-         class="flex gap-2 items-center">
-      <input formControlName="testname" placeholder="Test Name"
-        class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-      <input formControlName="result" placeholder="Result"
-        class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-      <button type="button" (click)="removeExamination(i)" class="text-red-500 font-bold">✕</button>
-    </div>
-  </div>
-  <button type="button" (click)="addExamination()" class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+ Add Examination</button>
-</div>
+      <!-- Treatment Plan -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Treatment Plan</label>
+        <textarea formControlName="treatmentPlan"
+          class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
+      </div>
+      <!-- Examination -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-800">Examination</label>
+        <div formArrayName="examination" class="space-y-2 mt-2">
+          <div *ngFor="let ex of examination.controls; let i = index" [formGroupName]="i"
+            class="flex gap-2 items-center">
+            <input formControlName="testname" placeholder="Test Name"
+              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
+            <input formControlName="result" placeholder="Result"
+              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
+            <button type="button" (click)="removeExamination(i)" class="text-red-500 font-bold">✕</button>
+          </div>
+        </div>
+        <button type="button" (click)="addExamination()"
+          class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+ Add Examination</button>
+      </div>
 
-<!-- Medicines -->
-<div>
-  <label class="block text-sm font-semibold text-gray-800">Medicines</label>
-  <div formArrayName="medicines" class="space-y-2 mt-2">
-    <div *ngFor="let med of medicines.controls; let i = index" [formGroupName]="i"
-         class="flex gap-2 items-center">
-      <input formControlName="name" placeholder="Medicine"
-        class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-      <input formControlName="dosage" placeholder="Dosage"
-        class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-      <input formControlName="frequency" placeholder="Frequency"
-        class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-      <button type="button" (click)="removeMedicine(i)" class="text-red-500 font-bold">✕</button>
-    </div>
-  </div>
-  <button type="button" (click)="addMedicine()" class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+ Add Medicine</button>
-</div>
+      <!-- Medicines -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-800">Medicines</label>
+        <div formArrayName="medicines" class="space-y-2 mt-2">
+          <div *ngFor="let med of medicines.controls; let i = index" [formGroupName]="i"
+            class="flex gap-2 items-center">
+            <input formControlName="name" placeholder="Medicine"
+              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
+            <input formControlName="dosage" placeholder="Dosage"
+              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
+            <input formControlName="frequency" placeholder="Frequency"
+              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
+            <button type="button" (click)="removeMedicine(i)" class="text-red-500 font-bold">✕</button>
+          </div>
+        </div>
+        <button type="button" (click)="addMedicine()" class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+
+          Add Medicine</button>
+      </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700">Advice</label>
@@ -141,7 +143,7 @@
 
   <!-- Submit -->
   <button type="submit"
-  class="rounded-full bg-blue-600 px-6 py-3 text-white font-semibold shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-  Save Patient
-</button>
+    class="rounded-full bg-blue-600 px-6 py-3 text-white font-semibold shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+    Save Patient
+  </button>
 </form>

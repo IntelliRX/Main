@@ -1,0 +1,15 @@
+<header class="flex items-center justify-between px-6 py-4 border-b">
+    <h1 class="text-xl font-bold">IntelliRx</h1>
+
+    <div class="flex items-center gap-4">
+        <!-- bell / settings icons -->
+        <button class="p-2 rounded-full hover:bg-gray-100">
+            <i class="lucide-bell"></i>
+        </button>
+
+        <!-- profile avatar -->
+        <app-profile-icon [imageUrl]="user?.photoURL ?? ''" [name]="user?.displayName ?? ''" [size]="40">
+
+        </app-profile-icon>
+    </div>
+</header>

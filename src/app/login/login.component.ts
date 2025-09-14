@@ -3,17 +3,17 @@ import { LoginService } from "../common/services/login.service";
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.css'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 
 export class LoginComponent {
-constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) { }
 
   async login() {
     if (this.loginService.isLoggedIn()) {
-      this.router.navigate(["/patient"]);
+      this.router.navigate(["/home"]);
     } else {
       // Show error message
     }

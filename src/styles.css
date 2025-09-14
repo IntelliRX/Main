@@ -1,13 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
 :root {
-      --primary-purple: #7C3AED;
-      --light-purple: #F3E8FF;
-      --medium-purple: #D8B4FE;
-      --dark-purple: #5B21B6;
-    }
+  --primary-purple: #7C3AED;
+  --light-purple: #F3E8FF;
+  --medium-purple: #D8B4FE;
+  --dark-purple: #5B21B6;
+  --primary-50: #f4e8ff;
+  --primary-100: #e9d1ff;
+  --primary-200: #d4a3ff;
+  --primary-300: #be75ff;
+  --primary-400: #a947ff;
+  --primary-500: #9319ff;
+  --primary-600: #8500f0;
+  --primary-700: #7500d1;
+  --primary-800: #6400b2;
+  --primary-900: #530093;
+  --primary-950: #4a0082;
+}
+
 body {
-      font-family: 'Manrope', sans-serif;
-    }
-    :root {
-        --primary-color: #7f13ec;
-      }
+  font-family: 'Manrope', sans-serif;
+  background-color: #F9FAFB;
+}
+
+/* Optional Tailwind utilities for common elements */
+.btn-primary {
+  @apply w-full flex justify-center py-3 px-4 rounded-lg text-white bg-purple-600 hover:bg-purple-700 shadow-sm;
+}
+
+.input-field {
+  @apply block w-full rounded-lg border-gray-300 shadow-sm h-12 px-4 focus:border-purple-500 focus:ring-purple-500 sm:text-sm;
+}
+
+/* Tailwind base, components, utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root CSS variables for theme colors */
+:root {
+  --primary-purple: #7C3AED;
+  --light-purple: #F3E8FF;
+  --medium-purple: #D8B4FE;
+  --dark-purple: #5B21B6;
+}
+
+/* Body font for the whole app */
+body {
+  font-family: 'Manrope', sans-serif;
+}
