@@ -27,6 +27,7 @@ jobs:
 
       - name: Install deps
         run: npm ci
+        working-directory: ./Main
 
       - name: Build (production)
         # This will call your project's build script. Common script: "build": "ng build"
