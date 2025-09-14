@@ -14,6 +14,6 @@ export class HeaderComponent {
     user: User | null = null;
 
     constructor(private loginService: LoginService) {
-        this.user = this.loginService.getUser();
+        this.user = this.loginService.user;
     }
 }

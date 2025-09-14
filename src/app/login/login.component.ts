@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {
+    if (this.loginService.isLoggedIn()) {
+      this.router.navigate(["/home"]);
+    }
+  }
 
   async login() {
     if (this.loginService.isLoggedIn()) {
@@ -22,7 +26,7 @@ export class LoginComponent {
   async signInWithGoogle() {
     const user = await this.loginService.loginWithGoogle();
     if (user) {
-      this.router.navigate(["/patient"]);
+      this.router.navigate(["/home"]);
     } else {
       alert("Google login failed");
     }

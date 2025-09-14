@@ -17,7 +17,7 @@ import { InputComponent } from "../common/controls/input/input.component";
 export class HomeComponent {
     user: User | null = null;
     constructor(private loginService: LoginService, private router: Router) {
-        this.user = this.loginService.getUser();
+        this.user = this.loginService.user;
     }
 
     async signOut() {
