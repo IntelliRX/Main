@@ -1,10 +1,14 @@
-<aside class="w-64 bg-white border-r border-gray-200 min-h-screen p-4 flex flex-col">
-    <div class="text-xl font-bold mb-8">Menu</div>
+<aside class="w-64 p-4 min-h-screen">
+    <div class="glass-card p-6 h-full">
+        <div class="text-xl font-bold mb-8 text-primary">Menu</div>
 
-    <nav class="flex flex-col gap-2">
-        <a *ngFor="let item of menuItems" [routerLink]="item.path" routerLinkActive="bg-purple-100 text-purple-700"
-            class="px-4 py-2 rounded hover:bg-gray-100 text-gray-700">
-            {{ item.label }}
-        </a>
-    </nav>
+        <nav class="flex flex-col gap-2">
+            <a *ngFor="let item of menuItems" 
+               [routerLink]="item.path" 
+               routerLinkActive="bg-purple-500/20 text-purple-300 border-purple-400/30"
+               class="glass-card px-4 py-3 rounded-xl hover:bg-white/10 text-secondary transition-all duration-300 border border-transparent">
+                {{ item.label }}
+            </a>
+        </nav>
+    </div>
 </aside>

@@ -1,149 +1,205 @@
-<form [formGroup]="patientForm" (ngSubmit)="submit()"
-  class="max-w-4xl mx-auto bg-white shadow-md rounded-2xl p-8 space-y-8">
+<div class="max-w-4xl mx-auto">
+  <form [formGroup]="patientForm" (ngSubmit)="submit()" class="glass-card p-8 space-y-8">
 
-  <!-- Header -->
-  <h2 class="text-2xl font-bold text-gray-900">Add / Edit Patient</h2>
-
-  <!-- Patient Info -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-    <!-- <div>
-      <label class="block text-sm font-medium text-gray-700">Patient ID (Phone)</label>
-      <input formControlName="id" type="text"
-        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-    </div> -->
-    <!-- Phone Input with Suggestions -->
-    <div class="relative">
-      <label class="block text-sm font-medium text-gray-700">Phone Number</label>
-      <input formControlName="id" type="text" (input)="searchPhones($event)"
-        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
-
-      <ul *ngIf="showPhoneSuggestions"
-        class="absolute z-10 bg-white border border-gray-200 mt-1 w-full rounded-lg shadow-md">
-        <li *ngFor="let phone of phoneSuggestions" (click)="selectPhone(phone)"
-          class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-          {{ phone }}
-        </li>
-      </ul>
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-primary mb-2">Add / Edit Patient</h2>
+      <p class="text-secondary">Enter patient information and medical details</p>
     </div>
-    <!-- <div formGroupName="data">
-      <label class="block text-sm font-medium text-gray-700">Name</label>
-      <input formControlName="name" type="text"
-        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-    </div> -->
-    <div class="relative" formGroupName="data">
-      <label class="block text-sm font-medium text-gray-700">Member Name</label>
-      <input formControlName="name" type="text" (input)="searchMembers($event)"
-        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" />
 
-      <ul *ngIf="showMemberSuggestions"
-        class="absolute z-10 bg-white border border-gray-200 mt-1 w-full rounded-lg shadow-md">
-        <li *ngFor="let member of memberSuggestions" (click)="selectMember(member)"
-          class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-          {{ member.id }} ({{ member.dateOfBirth || 'No DOB' }})
-        </li>
-      </ul>
-    </div>
-    <div formGroupName="data">
-      <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
-      <input formControlName="dateOfBirth" type="date"
-        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-    </div>
-    <div formGroupName="data">
-      <label class="block text-sm font-medium text-gray-700">Email</label>
-      <input formControlName="email" type="email"
-        class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-    </div>
-  </div>
+    <!-- Patient Info -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Phone Input with Suggestions -->
+      <div class="relative">
+        <label class="block text-sm font-medium text-secondary mb-2">Phone Number</label>
+        <input formControlName="id" 
+               type="text" 
+               (input)="searchPhones($event)"
+               class="glass-input w-full h-12" 
+               placeholder="Enter phone number" />
 
-  <!-- Present Illness -->
-  <div formGroupName="data">
-    <label class="block text-sm font-semibold text-gray-800">Present Illness</label>
-    <div formArrayName="presentIllness" class="space-y-2 mt-2">
-      <div *ngFor="let ill of presentIllness.controls; let i = index" class="flex gap-2">
-        <input [formControlName]="i" type="text"
-          class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-        <button type="button" (click)="presentIllness.removeAt(i)" class="text-red-500">✕</button>
-      </div>
-    </div>
-    <button type="button" (click)="addIllness()" class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+ Add
-      Illness</button>
-  </div>
-
-  <!-- Allergies -->
-  <div formGroupName="data">
-    <label class="block text-sm font-medium text-gray-700">Allergies</label>
-    <input formControlName="allergies" type="text"
-      class="form-input mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-  </div>
-
-  <!-- Details -->
-  <div formGroupName="data">
-    <div formGroupName="details" class="space-y-6">
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Chief Complaints</label>
-        <textarea formControlName="chiefComplaints"
-          class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
-      </div>
-      <!-- Diagnosis -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Diagnosis</label>
-        <textarea formControlName="diagnosis"
-          class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
+        <ul *ngIf="showPhoneSuggestions"
+            class="absolute z-10 glass-card mt-1 w-full rounded-lg max-h-48 overflow-y-auto">
+          <li *ngFor="let phone of phoneSuggestions" 
+              (click)="selectPhone(phone)"
+              class="px-4 py-3 cursor-pointer hover:bg-white/10 text-secondary transition-colors duration-200">
+            {{ phone }}
+          </li>
+        </ul>
       </div>
 
-      <!-- Treatment Plan -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Treatment Plan</label>
-        <textarea formControlName="treatmentPlan"
-          class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
+      <!-- Member Name with Suggestions -->
+      <div class="relative" formGroupName="data">
+        <label class="block text-sm font-medium text-secondary mb-2">Member Name</label>
+        <input formControlName="name" 
+               type="text" 
+               (input)="searchMembers($event)"
+               class="glass-input w-full h-12" 
+               placeholder="Enter member name" />
+
+        <ul *ngIf="showMemberSuggestions"
+            class="absolute z-10 glass-card mt-1 w-full rounded-lg max-h-48 overflow-y-auto">
+          <li *ngFor="let member of memberSuggestions" 
+              (click)="selectMember(member)"
+              class="px-4 py-3 cursor-pointer hover:bg-white/10 text-secondary transition-colors duration-200">
+            {{ member.id }} <span class="text-tertiary">({{ member.dateOfBirth || 'No DOB' }})</span>
+          </li>
+        </ul>
       </div>
-      <!-- Examination -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-800">Examination</label>
-        <div formArrayName="examination" class="space-y-2 mt-2">
-          <div *ngFor="let ex of examination.controls; let i = index" [formGroupName]="i"
-            class="flex gap-2 items-center">
-            <input formControlName="testname" placeholder="Test Name"
-              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-            <input formControlName="result" placeholder="Result"
-              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-            <button type="button" (click)="removeExamination(i)" class="text-red-500 font-bold">✕</button>
-          </div>
+
+      <div formGroupName="data">
+        <label class="block text-sm font-medium text-secondary mb-2">Date of Birth</label>
+        <input formControlName="dateOfBirth" 
+               type="date"
+               class="glass-input w-full h-12" />
+      </div>
+
+      <div formGroupName="data">
+        <label class="block text-sm font-medium text-secondary mb-2">Email</label>
+        <input formControlName="email" 
+               type="email"
+               class="glass-input w-full h-12" 
+               placeholder="patient@example.com" />
+      </div>
+    </div>
+
+    <!-- Present Illness -->
+    <div formGroupName="data" class="glass-card p-6 bg-white/5">
+      <label class="block text-lg font-semibold text-primary mb-4">Present Illness</label>
+      <div formArrayName="presentIllness" class="space-y-3">
+        <div *ngFor="let ill of presentIllness.controls; let i = index" class="flex gap-3">
+          <input [formControlName]="i" 
+                 type="text"
+                 class="glass-input flex-1 h-10" 
+                 placeholder="Describe illness..." />
+          <button type="button" 
+                  (click)="presentIllness.removeAt(i)" 
+                  class="glass-card px-3 py-2 text-red-400 hover:bg-red-500/20 transition-colors duration-200">
+            ✕
+          </button>
         </div>
-        <button type="button" (click)="addExamination()"
-          class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+ Add Examination</button>
       </div>
+      <button type="button" 
+              (click)="addIllness()" 
+              class="mt-4 glass-button px-4 py-2 text-sm">
+        + Add Illness
+      </button>
+    </div>
 
-      <!-- Medicines -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-800">Medicines</label>
-        <div formArrayName="medicines" class="space-y-2 mt-2">
-          <div *ngFor="let med of medicines.controls; let i = index" [formGroupName]="i"
-            class="flex gap-2 items-center">
-            <input formControlName="name" placeholder="Medicine"
-              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-            <input formControlName="dosage" placeholder="Dosage"
-              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-            <input formControlName="frequency" placeholder="Frequency"
-              class="form-input flex-1 rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]" />
-            <button type="button" (click)="removeMedicine(i)" class="text-red-500 font-bold">✕</button>
-          </div>
+    <!-- Allergies -->
+    <div formGroupName="data">
+      <label class="block text-sm font-medium text-secondary mb-2">Allergies</label>
+      <input formControlName="allergies" 
+             type="text"
+             class="glass-input w-full h-12" 
+             placeholder="List any known allergies..." />
+    </div>
+
+    <!-- Medical Details -->
+    <div formGroupName="data" class="glass-card p-6 bg-white/5">
+      <div formGroupName="details" class="space-y-6">
+        <div>
+          <label class="block text-sm font-medium text-secondary mb-2">Chief Complaints</label>
+          <textarea formControlName="chiefComplaints"
+                    rows="3"
+                    class="glass-input w-full resize-none" 
+                    placeholder="Describe the main complaints..."></textarea>
         </div>
-        <button type="button" (click)="addMedicine()" class="mt-2 text-sm text-[var(--primary-600)] hover:underline">+
-          Add Medicine</button>
-      </div>
 
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Advice</label>
-        <textarea formControlName="advice"
-          class="form-textarea mt-1 block w-full rounded-lg border-gray-300 focus:border-[var(--primary-500)] focus:ring-[var(--primary-500)]"></textarea>
+        <div>
+          <label class="block text-sm font-medium text-secondary mb-2">Diagnosis</label>
+          <textarea formControlName="diagnosis"
+                    rows="3"
+                    class="glass-input w-full resize-none" 
+                    placeholder="Enter diagnosis..."></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-secondary mb-2">Treatment Plan</label>
+          <textarea formControlName="treatmentPlan"
+                    rows="3"
+                    class="glass-input w-full resize-none" 
+                    placeholder="Outline treatment plan..."></textarea>
+        </div>
+
+        <!-- Examination -->
+        <div>
+          <label class="block text-lg font-semibold text-primary mb-4">Examination</label>
+          <div formArrayName="examination" class="space-y-3">
+            <div *ngFor="let ex of examination.controls; let i = index" 
+                 [formGroupName]="i"
+                 class="flex gap-3 items-center">
+              <input formControlName="testname" 
+                     placeholder="Test Name"
+                     class="glass-input flex-1 h-10" />
+              <input formControlName="result" 
+                     placeholder="Result"
+                     class="glass-input flex-1 h-10" />
+              <button type="button" 
+                      (click)="removeExamination(i)" 
+                      class="glass-card px-3 py-2 text-red-400 hover:bg-red-500/20 transition-colors duration-200">
+                ✕
+              </button>
+            </div>
+          </div>
+          <button type="button" 
+                  (click)="addExamination()"
+                  class="mt-4 glass-button px-4 py-2 text-sm">
+            + Add Examination
+          </button>
+        </div>
+
+        <!-- Medicines -->
+        <div>
+          <label class="block text-lg font-semibold text-primary mb-4">Medicines</label>
+          <div formArrayName="medicines" class="space-y-3">
+            <div *ngFor="let med of medicines.controls; let i = index" 
+                 [formGroupName]="i"
+                 class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <input formControlName="name" 
+                     placeholder="Medicine Name"
+                     class="glass-input h-10" />
+              <input formControlName="dosage" 
+                     placeholder="Dosage"
+                     class="glass-input h-10" />
+              <div class="flex gap-2">
+                <input formControlName="frequency" 
+                       placeholder="Frequency"
+                       class="glass-input flex-1 h-10" />
+                <button type="button" 
+                        (click)="removeMedicine(i)" 
+                        class="glass-card px-3 py-2 text-red-400 hover:bg-red-500/20 transition-colors duration-200">
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+          <button type="button" 
+                  (click)="addMedicine()" 
+                  class="mt-4 glass-button px-4 py-2 text-sm">
+            + Add Medicine
+          </button>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-secondary mb-2">Advice</label>
+          <textarea formControlName="advice"
+                    rows="3"
+                    class="glass-input w-full resize-none" 
+                    placeholder="Additional advice for the patient..."></textarea>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Submit -->
-  <button type="submit"
-    class="rounded-full bg-blue-600 px-6 py-3 text-white font-semibold shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-    Save Patient
-  </button>
-</form>
+    <!-- Submit Button -->
+    <div class="text-center pt-6">
+      <button type="submit"
+              class="glass-button px-12 py-4 text-lg font-semibold glowing">
+        <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        Save Patient Record
+      </button>
+    </div>
+  </form>
+</div>
