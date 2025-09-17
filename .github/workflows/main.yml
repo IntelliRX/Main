@@ -30,14 +30,17 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      # 👉 If this is a *project site*, set your repo name here:
-      #    e.g. REPO_BASE="/your-repo-name/"
-      #    If it's a user/org site, leave it as "/"
-      - name: Set base href
-        run: echo "REPO_BASE='/'" >> $GITHUB_ENV
+      - name: Compute repo base (auto)
+        run: |
+          # GITHUB_REPOSITORY is "owner/repo"
+          REPO_NAME=${GITHUB_REPOSITORY#*/}
+          echo "REPO_BASE=/$REPO_NAME/" >> $GITHUB_ENV
+          echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+          echo "Computed REPO_BASE=$REPO_BASE"
 
       - name: Build (production)
         run: |
+          # Try npm build script (if exists) and pass --base-href from REPO_BASE.
           if npm run | grep -q "^ *build"; then
             npm run build -- --configuration production --base-href "${REPO_BASE}" || \
             npm run build -- --base-href "${REPO_BASE}" || \
@@ -60,10 +63,11 @@ jobs:
           else
             cp -a dist/. site/
           fi
-          # SPA fallback: copy index.html to 404.html so deep links work
+          # SPA fallback and disable Jekyll
           cp site/index.html site/404.html || true
-          # Disable Jekyll processing
           touch site/.nojekyll
+          echo "Site folder contents:"
+          ls -la site
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -76,9 +80,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
