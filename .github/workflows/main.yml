@@ -59,11 +59,15 @@ jobs:
           fi
           entries=(dist/*)
           if [ ${#entries[@]} -eq 1 ] && [ -d "${entries[0]}" ]; then
-            cp -a "${entries[0]}/." site/
+            # If Angular Universal build, copy from browser/
+            if [ -d "${entries[0]}/browser" ]; then
+              cp -a "${entries[0]}/browser/." site/
+            else
+              cp -a "${entries[0]}/." site/
+            fi
           else
             cp -a dist/. site/
           fi
-          # SPA fallback and disable Jekyll
           cp site/index.html site/404.html || true
           touch site/.nojekyll
           echo "Site folder contents:"
