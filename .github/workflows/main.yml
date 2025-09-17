@@ -36,7 +36,7 @@ jobs:
           REPO_NAME=${GITHUB_REPOSITORY#*/}
           echo "REPO_BASE=/$REPO_NAME/" >> $GITHUB_ENV
           echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
-          echo "Computed REPO_BASE=$REPO_BASE"
+          echo "Computed REPO_BASE=/$REPO_NAME/"
 
       - name: Build (production)
         run: |
@@ -52,24 +52,51 @@ jobs:
       - name: Prepare site folder for Pages
         run: |
           set -e
+          echo "Preparing site folder..."
           rm -rf site
           mkdir -p site
+
           if [ ! -d dist ]; then
             echo "No dist directory found"; ls -la; exit 1
           fi
+
           entries=(dist/*)
+          # If dist contains a single folder (common), use it; else use dist root
           if [ ${#entries[@]} -eq 1 ] && [ -d "${entries[0]}" ]; then
-            # If Angular Universal build, copy from browser/
+            echo "Found single dist subfolder: ${entries[0]}"
+            # If this is an Angular Universal output, prefer the browser/ subfolder
             if [ -d "${entries[0]}/browser" ]; then
+              echo "Detected Angular Universal output; copying browser/ -> site/"
               cp -a "${entries[0]}/browser/." site/
             else
               cp -a "${entries[0]}/." site/
             fi
           else
+            echo "Multiple entries in dist/; copying dist/. -> site/"
             cp -a dist/. site/
           fi
-          cp site/index.html site/404.html || true
+
+          # Some builds (CSR) emit index.csr.html — make sure we have index.html
+          if [ ! -f site/index.html ]; then
+            if [ -f site/index.csr.html ]; then
+              echo "index.html missing but index.csr.html found — copying to index.html"
+              cp site/index.csr.html site/index.html
+            elif [ -f site/index.html ]; then
+              echo "index.html exists"
+            else
+              echo "Warning: index.html not found in site/ — listing files for debugging"
+              ls -la site || true
+              # Don't fail here to allow deploy step to run and give more logs,
+              # but GitHub Pages will 404 without index.html
+            fi
+          fi
+
+          # SPA fallback and disable Jekyll
+          if [ -f site/index.html ]; then
+            cp site/index.html site/404.html || true
+          fi
           touch site/.nojekyll
+
           echo "Site folder contents:"
           ls -la site
 
